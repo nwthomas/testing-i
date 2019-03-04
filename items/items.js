@@ -9,17 +9,19 @@ module.exports = {
       - Durability of an item cannot be less than 20 when the item's enhancement level is between +0 and +15
       - If item enhacement is 14 or lower, the item cannot be enhanced if the durability is below 25
       - If the items' enchancement is 15 or higher, the item cannot be ehanced if the durability is below 10
+      - If item enhacement is 14 or lower, the item cannot be enhanced if the durability is below 25
+      - If the items' enchancement is 15 or higher, the item cannot be ehanced if the durability is below 10
+
       */
     },
     fail(item) {
-      const { name, displayName, type, durability, enhancement } = { ...item };
-      durability < 15 && durability - 5;
-      durability >= 15 && durability - 10;
-      enhancement > 16 && enhancement - 1;
+      let { name, displayName, type, durability, enhancement } = { ...item };
+      durability <= 14 && (durability = durability - 5);
+      durability >= 15 && (durability = durability - 10);
+      enhancement > 16 && (enhancement = enhancement - 1);
       enhancement > 0
         ? (displayName = `${enhanceLevels[enhancement]} ${name}`)
         : (displayName = name);
-
       return { name, displayName, type, durability, enhancement };
     },
     repair(item) {
@@ -69,12 +71,10 @@ const enhanceLevels = {
 //=========================== Fail
 /*
   
-  - Takes item and returns new item
-  - Durability of the item is decreased by 5 if the item's enhancement is 0-14
-  - Durability of the item is decreased by 10 if the item's enhancement is greater than 14
-  - If enhancement level is greater than 16, the enhancement level decreases by 1.
-  - Name is update with new level
-  - If item enhacement is 14 or lower, the item cannot be enhanced if the durability is below 25
-  - If the items' enchancement is 15 or higher, the item cannot be ehanced if the durability is below 10
+  - DONE - Takes item and returns new item
+  - DONE - Durability of the item is decreased by 5 if the item's enhancement is 0-14
+  - DONE - Durability of the item is decreased by 10 if the item's enhancement is greater than 14
+  - DONE - If enhancement level is greater than 16, the enhancement level decreases by 1.
+  - DONE - Name is update with new level
   
 */
