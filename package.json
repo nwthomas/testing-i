@@ -4,7 +4,7 @@
   "description": "Testing I assignment for Lambda School",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest --watch --verbose"
   },
   "repository": {
     "type": "git",

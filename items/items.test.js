@@ -1,41 +1,63 @@
-//=========================== Success
-/*
+const { success, fail, repair } = require("./items").enhancer;
 
-- Takes item and returns new item
-- Enhancements start at 0
-- Maximum possible enhancements is PEN (20)
-- Enhancing armor up to 5 cannot fail
-- Enhanving weapon up to 7 cannot fail
-- Durability of an item cannot be less than 20 when the item's enhancement level is between +0 and +15
-- Durability of an item cannot be less than 0 when the item's enhancement level is between +15 and TET
-
-
-*/
-
-//=========================== Fail
-/*
-
-- Takes item and returns new item
-
-
-*/
-
-//=========================== Repair
-/*
-
-- Takes item and returns new item with durability restored to 100
-
-
-*/
-
-//=========================== Item Model
 /*
 
 const item = {
   name,
+  displayName,
   type, (weapon or armor)
   durability, (starts of 100)
   enhancement (start at 0, max of PEN = 20)
 }
 
 */
+
+const items = {
+  broadsword: {
+    name: "Broadsword",
+    displayName: "Broadsword",
+    type: "weapon",
+    durability: 80,
+    enhancement: 0
+  },
+  knightHelmet: {
+    name: "Knight Helmet",
+    displayName: "[PRI] Knight Helmet",
+    type: "armor",
+    durabilty: 20,
+    enhancement: 16
+  },
+  greatShield: {
+    name: "Great Shield",
+    displayName: "[+15] Great Shield",
+    type: "armor",
+    durabilty: 50,
+    enhancement: 15
+  }
+};
+
+describe("enhancer library", () => {
+  describe("success() method", () => {
+    // Build out
+  });
+  describe("fail() method", () => {
+    // Build out
+  });
+  describe("repair() method", () => {
+    it("takes in an item and returns it fully repaired", () => {
+      expect(repair(items.knightHelmet)).toMatchObject({
+        ...items.knightHelmet,
+        durability: 100
+      });
+      expect(repair(items.broadsword).durability).toEqual(100);
+    });
+    it("tests method with varous bad inputs", () => {
+      expect(repair("string")).toBeNull();
+      expect(repair(null)).toBeNull();
+      expect(repair(undefined)).toBeNull();
+      expect(repair([])).toBeNull();
+      expect(repair({})).toBeNull();
+      expect(repair(1)).toBeNull();
+    });
+  });
+});
