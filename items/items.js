@@ -3,9 +3,7 @@ module.exports = {
     success(item) {
       let { name, displayName, type, durability, enhancement } = { ...item };
       /*
-
-      - Enhancing armor up to 5 cannot fail
-      - Enhanving weapon up to 7 cannot fail
+      
       - Enhacement levels above 0 are displayed as [+n] up to 15 and the letters above that
       - Durability of an item cannot be less than 20 when the item's enhancement level is between +0 and +15
       - If item enhacement is 14 or lower, the item cannot be enhanced if the durability is below 25
@@ -16,16 +14,20 @@ module.exports = {
       */
     },
     fail(item) {
-      let { name, displayName, type, durability, enhancement } = { ...item };
-      if (enhancement <= 5 && type === "armor") return item; // Keeps armor from failing up to level 5
-      if (enhancement <= 7 && type === "weapon") return item; // Keeps weapon from failing up to level 7
-      enhancement <= 14 && (durability = durability - 5); // Decreases durability by 5 if enhancement <= 14
-      enhancement >= 15 && (durability = durability - 10); // Decreases durability by 10 if enhacement >= 15
-      enhancement > 16 && (enhancement = enhancement - 1); // Decreases enhancement if enhancement > 16
-      enhancement > 0
-        ? (displayName = `${enhanceLevels[enhancement]} ${name}`)
-        : (displayName = name); // If enhancement level is > 0, update namce using enhanceLevels object
-      return { name, displayName, type, durability, enhancement };
+      if (typeof item === "object" && item && item.name) {
+        let { name, displayName, type, durability, enhancement } = { ...item };
+        if (enhancement <= 5 && type === "armor") return item; // Keeps armor from failing up to level 5
+        if (enhancement <= 7 && type === "weapon") return item; // Keeps weapon from failing up to level 7
+        enhancement <= 14 && (durability = durability - 5); // Decreases durability by 5 if enhancement <= 14
+        enhancement >= 15 && (durability = durability - 10); // Decreases durability by 10 if enhacement >= 15
+        enhancement > 16 && (enhancement = enhancement - 1); // Decreases enhancement if enhancement > 16
+        enhancement > 0
+          ? (displayName = `${enhanceLevels[enhancement]} ${name}`)
+          : (displayName = name); // If enhancement level is > 0, update namce using enhanceLevels object
+        return { name, displayName, type, durability, enhancement };
+      } else {
+        return null;
+      }
     },
     repair(item) {
       if (typeof item === "object" && item && item.name) {
