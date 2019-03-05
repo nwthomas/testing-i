@@ -38,7 +38,7 @@ Follow these steps for completing your project.
 
 - [x] Submit a Pull-Request to merge the `<firstName-lastName>` branch into the master branch on your fork. **Please don't merge your own pull request**
 - [x] Use GitHub's website to add your project manager as a reviewer on the pull-request.
-- [ x Your project manager will count the project as complete by merging the branch back into the master branch of your forked repository.
+- [x] Your project manager will count the project as complete by merging the branch back into the master branch of your forked repository.
 
 ## Minimum Viable Product
 
