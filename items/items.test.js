@@ -1,18 +1,41 @@
 const { success, fail, repair } = require("./items").enhancer;
 
-const items = {
-  dagger: {
-    name: "Dagger",
-    displayName: "Dagger",
-    type: "weapon",
-    durability: 100,
-    enhancement: 0
-  }
-};
-
 describe("enhancer library", () => {
   describe("success() method", () => {
-    // Build out
+    it("can't upgrade if enhancement is <= 14 and durability is < 25", () => {
+      const dagger = {
+        name: "Dagger",
+        displayName: "Dagger",
+        type: "weapon",
+        durability: 20,
+        enhancement: 0
+      };
+      expect(success(dagger)).toEqual({ ...dagger });
+    });
+    it("can't upgrade if enhancement is >= 15 and durability is < 10", () => {
+      const dagger = {
+        name: "Dagger",
+        displayName: "[DUO] Dagger",
+        type: "weapon",
+        durability: 9,
+        enhancement: 17
+      };
+      expect(success(dagger)).toEqual({ ...dagger });
+    });
+    it("increases enhancement level by 1 and updates displayName", () => {
+      const dagger = {
+        name: "Dagger",
+        displayName: "Dagger",
+        type: "weapon",
+        durability: 60,
+        enhancement: 0
+      };
+      expect(success(dagger)).toEqual({
+        ...dagger,
+        enhancement: 1,
+        displayName: "[+1] Dagger"
+      });
+    });
   });
   describe("fail() method", () => {
     it("checks if returned item is different from original one", () => {
