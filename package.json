@@ -1,0 +1,23 @@
+{
+  "name": "testing-i",
+  "version": "1.0.0",
+  "description": "Testing I assignment for Lambda School",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nwthomas/testing-i.git"
+  },
+  "keywords": [
+    "Testing",
+    "Jest"
+  ],
+  "author": "Nathan Thomas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nwthomas/testing-i/issues"
+  },
+  "homepage": "https://github.com/nwthomas/testing-i#readme"
+}
