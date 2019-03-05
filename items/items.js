@@ -1,6 +1,7 @@
 module.exports = {
   enhancer: {
     success(item) {
+      let { name, displayName, type, durability, enhancement } = { ...item };
       /*
 
       - Enhancing armor up to 5 cannot fail
@@ -16,16 +17,22 @@ module.exports = {
     },
     fail(item) {
       let { name, displayName, type, durability, enhancement } = { ...item };
-      durability <= 14 && (durability = durability - 5);
-      durability >= 15 && (durability = durability - 10);
-      enhancement > 16 && (enhancement = enhancement - 1);
+      if (enhancement <= 5 && type === "armor") return item; // Keeps armor from failing up to level 5
+      if (enhancement <= 7 && type === "weapon") return item; // Keeps weapon from failing up to level 7
+      enhancement <= 14 && (durability = durability - 5); // Decreases durability by 5 if enhancement <= 14
+      enhancement >= 15 && (durability = durability - 10); // Decreases durability by 10 if enhacement >= 15
+      enhancement > 16 && (enhancement = enhancement - 1); // Decreases enhancement if enhancement > 16
       enhancement > 0
         ? (displayName = `${enhanceLevels[enhancement]} ${name}`)
-        : (displayName = name);
+        : (displayName = name); // If enhancement level is > 0, update namce using enhanceLevels object
       return { name, displayName, type, durability, enhancement };
     },
     repair(item) {
-      return { ...item, durability: 100 };
+      if (typeof item === "object" && item && item.name) {
+        return { ...item, durability: 100 };
+      } else {
+        return null;
+      }
     }
   }
 };
